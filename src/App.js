@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React, {useState, useEffect} from "react";
+import About from "./components/About/About";
+import Navbar from "./components/Navbar/Navbar";
+import Portada from "./components/portada/Portada";
+import MyCarousel from "./components/Carousel/MyCarousel";
+import Info from "./components/info/Info";
+import Footer from "./components/Footer/Footer";
 
 function App() {
+  // scroll de la pagina
+ const [scrollHeight, setScrollHeight] = useState(0);
+ const handleScroll = () =>{
+   const position = window.pageYOffset;
+   setScrollHeight(position);
+ };
+
+ useEffect(() => {
+   window.addEventListener('scroll', handleScroll)
+ }, [scrollHeight]);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Portada />
+     <Navbar isScrolling={scrollHeight} />
+     <About />
+    <MyCarousel />
+     <Info />
+     <Footer />
     </div>
   );
 }
